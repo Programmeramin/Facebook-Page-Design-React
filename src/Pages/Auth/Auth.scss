@@ -10,12 +10,13 @@
         width: 977px;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+       
 
         .fb-auth-left{
+            margin: 20px;
               
             img{
-                width: 300px;
+                width: 320px;
                 transform: translate(-27px, 16px);
             }
 
@@ -122,5 +123,31 @@
         }
 
     }
+
+}
+
+
+
+.sign-up-form{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+
+    .h-form{
+        display: flex;
+        gap: 5px;
+    }
+
+   input{
+    width: 100%;
+    padding: 6px;
+    font-size: 15px;
+    background-color: #f5f5f7;
+    border-color: 1px solid #ccd0d5;
+   border-radius: 5px;
+
+   }
+
+   
 
 }
