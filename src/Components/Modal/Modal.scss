@@ -11,8 +11,8 @@
 
     
     .modal-container{
-    width: 432px;
-    background-color: #fff;
+     width: 432px;
+     background-color: #fff;
      box-shadow: var(--fb-shadow);
      border-radius: 10px;
 
@@ -29,11 +29,109 @@
         padding: 15px;
 
 
+        .sign-up-form{
+          display: flex;
+          gap: 10px;
+          flex-direction: column;
+      
+          .h-form{
+              display: flex;
+              gap: 5px;
+              position: relative;
+
+
+              .first-name{
+
+                position: relative;
+
+                svg{
+                  position: absolute;
+                  right: 6px;
+                  top: 9px;
+                  color: red;
+                  background: #fff;
+                  font-size: 20px;
+                 
+                }
+
+              }
+
+
+              .last-name{
+                position: relative;
+
+                svg{
+                  position: absolute;
+                  right: 6px;
+                  top: 9px;
+                  color: red;
+                  background: #fff;
+                  font-size: 20px;
+                  
+                  
+                }
+
+              }
+ 
+            
+          }
+
+          
+          .moe{
+            position: relative;
+
+            svg{
+              position: absolute;
+              top: 8px;
+              right: 6px;
+              font-size: 20px;
+              color: red;
+            }
+
+          }
+
+
+          .pass{
+            position: relative;
+
+            svg{
+              position: absolute;
+              top: 8px;
+              right: 6px;
+              font-size: 20px;
+              color: red;
+            }
+
+          }
+
+        
+      input{
+              width: 100%;
+              padding: 6px;
+              font-size: 15px;
+              background-color: #f5f5f7;
+              border-color: 1px solid #ccd0d5;
+             border-radius: 5px;
+             border: 1px solid rgb(165, 165, 165);
+          
+             }
+
+      
+      }
+
         .reg-extra{
+          position: relative;
           display: flex;
           flex-direction: column;
           gap: 5px;
       
+          .svg-danger{
+            position: absolute;
+            top: 6px;
+            color: red;
+            right: 5px;
+            font-size: 18px;
+          }
       
           .reg-extra-opt{
               display: flex;

@@ -40,7 +40,7 @@ const Auth = () => {
     <>
     <Meta title="facebook - log in or sign up"/>
 
-{modal &&(
+    {modal &&(
   <Modal hide={setModal}>
 
 

@@ -5,11 +5,15 @@ import { useState } from "react";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { createToast } from "../../Helpers/Helper";
+import { CgDanger } from "react-icons/cg";
 
-// get facebook years
+  import { isEmail } from "../../Helpers/Helper";
+  import { isMobile } from "../../Helpers/Helper";
 
-// const years = Array.from({
-//   length : 100}, (_, i) => new Date().getFullYear() - i);
+ //get facebook years
+
+ //const years = Array.from({
+   //length : 100}, (_, i) => new Date().getFullYear() - i);
 
 const years = Array.from({
   length : new Date().getFullYear() -1900 }, (_, i) =>1900 + i).reverse()  ;
@@ -58,11 +62,23 @@ const Modal = ({children, hide}) => {
        e.preventDefault();
 
        // validation
-       if(!input.first_name || !input.sur_name || input.moe || input.password || !input.gender || !input.day || !input.month || !input.year){
+       if(!input.first_name || !input.sur_name || input.moe || input.password){
         createToast("all fields are required");
        }else{
-        createToast("")
+        if(!isEmail(input.moe)){
+          createToast('Email Is"t valid')
+         }else if(!isMobile(input.moe)){
+          createToast("Mobile Is't valid")
+         }else{
+          createToast("Data stable", "success")
+         }
+  
        }
+
+       // Isemail & Ismobile & Isotp &IsPass validation
+
+       
+
   }
   
   // handle input blur
@@ -80,6 +96,8 @@ const Modal = ({children, hide}) => {
     }
   }
 
+ 
+
   return (
     <>
     <div className="modal-blur-area">
@@ -93,33 +111,57 @@ const Modal = ({children, hide}) => {
         </div>
         <div className="modal-body">
         <form onSubmit={handleUserRegister} className="sign-up-form">
-           <div className="h-form">
+        <div className="h-form">
 
-           <input 
-           className={border.first_name ? "" : "red-border"} type="text" placeholder="First Name" name="first_name" value={input.first_name} onChange={handleInputValue} onBlur={handleInputBlur}/>
+          <div className="first-name">
+          <input 
+           className={border.first_name ? "" : "red-border visible"}
+           type="text" placeholder="First Name" name="first_name" value={input.first_name} onChange={handleInputValue} onBlur={handleInputBlur}/>
+           {border.first_name ? "" : < CgDanger/>} 
 
-           <input className={border.sur_name ? "" : "red-border"} type="text" placeholder="Sure Name" name="sur_name" value={input.sur_name} onChange={handleInputValue} onBlur={handleInputBlur}/>
+          </div>
+
+         <div className="last-name">
+         <input className={border.sur_name ? "" : "red-border"} type="text" placeholder="Sure Name" name="sur_name" value={input.sur_name} onChange={handleInputValue} onBlur={handleInputBlur}/>
+         {border. sur_name ? "" : < CgDanger/>} 
+         </div>
 
         </div>
-         <input className={border.moe ? "" : "red-"} type="text" placeholder="Mobile number or Email address" name="moe" value={input.moe} onChange={handleInputValue} onBlur={handleInputBlur}/>
+        
+        <div className="moe">
+        <input className={border.moe ? "" : "red-border"} type="text" placeholder="Mobile number or Email address" name="moe" value={input.moe} onChange={handleInputValue} onBlur={handleInputBlur}/>
+         {border.moe ? "" : < CgDanger/>} 
 
-         <input className={border.password ? "" : "red-border"} type="text" placeholder="New Password" name="password" value={input.password} onChange={handleInputValue} onBlur={handleInputBlur}/>
+        </div>
+
+          <div className="pass">
+          <input className={border.password ? "" : "red-border"} type="text" placeholder="New Password" name="password" value={input.password} onChange={handleInputValue} onBlur={handleInputBlur}/>
+          {border.password ? "" : < CgDanger/>} 
+
+         
+          </div>
+        
          <div className="reg-extra">
+
+             
+
           <span className="reg-extra-title">Date of birth <AiFillQuestionCircle /></span>
           <div className="reg-extra-opt">
-
+               
             <select className={border.day ? "" : "red-border"} name="day" value={input.day} onChange={handleInputValue} onBlur={handleInputBlur}>
             <option value="">Day</option>
             {day ?.map((item, index) =>(
-              <option value="" key={index} selected={new Date().getDate() === item ? true : false}>{item}</option>
+              <option value={item} key={index} selected={new Date().getDate() === item ? true : false}>{item}</option>
             ))}
             </select>
 
             <select className={border.month ? "" : "red-border"} name="month" value={input.month} onChange={handleInputValue} onBlur={handleInputBlur}>
+             
             <option value="">Month</option>
             {month ?.map((item, index) =>(
-              <option value={item} key={index} selected={new Date().getMonth() === index ? true : false}>{item}</option>
+              <option value={item} key={index} selected={new Date().getMonth() === item ? true : false}>{item}</option>
             ))}
+
               </select>
 
               <select className={border.year ? "" : "red-border"} name="year" value={input.year} onChange={handleInputValue} onBlur={handleInputBlur}>
@@ -129,6 +171,7 @@ const Modal = ({children, hide}) => {
               ))}
               </select>
           </div>
+         {border.day && border.month && border.year ? "" :  <CgDanger className="svg-danger"/>}
          </div>
 
          <div className="reg-extra">
@@ -137,18 +180,18 @@ const Modal = ({children, hide}) => {
             
              <label>
              <span>Female</span>
-             <input name="gender" type="radio" value="Female" onChange={() => setgender("Female")} onChange={handleInputValue}/>
+             <input name="gender" type="radio" value="Female" onChange={() => setInput("Female")} onChange={handleInputValue}/>
              </label>
             
             <label>
             <span>Male</span>
-             <input name="gender" type="radio" value="Male" onChange={() => setgender("Male")} onChange={handleInputValue}/>
+             <input name="gender" type="radio" value="Male" onChange={() => setInput("Male")} onChange={handleInputValue}/>
              </label>
               
              
               <label>
               <span>Custom</span>
-             <input name="gender" type="radio" value="Custom" onChange={() => setgender("Custom")} onChange={handleInputValue}/>
+             <input name="gender" type="radio" value="Custom" onChange={() => setInput("Custom")} onChange={handleInputValue}/>
               </label>
 
               
