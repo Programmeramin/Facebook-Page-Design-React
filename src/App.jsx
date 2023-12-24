@@ -28,7 +28,7 @@ theme="light"
 
      <RouterProvider router={router}/>
     </>
-  )
+  )  
 }
 
 export default App
